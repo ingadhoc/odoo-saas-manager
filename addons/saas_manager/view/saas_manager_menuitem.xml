@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+##############################################################################
+#
+#    Saas Manager
+#    Copyright (C) 2014 Sistemas ADHOC
+#    No email
+#
+#    This program is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU Affero General Public License as
+#    published by the Free Software Foundation, either version 3 of the
+#    License, or (at your option) any later version.
+#
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU Affero General Public License for more details.
+#
+#    You should have received a copy of the GNU Affero General Public License
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#
+##############################################################################
+
+-->
+<openerp>
+    <data>
+
+        <menuitem
+            name="SaaS"
+            id="menu_saas"
+            sequence="10"
+            />
+
+
+        <menuitem
+            name="Configuration"
+            id="menu_configuration"
+            sequence="90"
+            parent="menu_saas"
+            />
+
+
+        <menuitem
+            name="Services"
+            id="menu_services"
+            sequence="10"
+            parent="menu_saas"
+            />
+
+        <record id="action_saas_manager_instance_instances" model="ir.actions.act_window">
+            <field name="name">Instances</field>
+            <field name="res_model">saas_manager.instance</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="view_saas_manager_instance_tree"/>
+            <field name="search_view_id" ref="view_saas_manager_instance_filter"/>
+            <field name="domain">[]</field>
+        </record>
+
+        <menuitem
+            name="Instances"
+            id="menu_instances"
+            sequence="10"
+            action="action_saas_manager_instance_instances"
+            parent="menu_services"
+            />
+
+        <record id="action_saas_manager_product_saas_products" model="ir.actions.act_window">
+            <field name="name">SaaS Products</field>
+            <field name="res_model">product.product</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="view_saas_manager_product_tree"/>
+            <field name="search_view_id" ref="view_saas_manager_product_filter"/>
+            <field name="context">{'default_saas_subtype':'product','default_type':'saas'}</field>
+            <field name="domain">[('type','=','saas'),('saas_subtype','=','product')]</field>
+        </record>
+
+        <menuitem
+            name="SaaS Products"
+            id="menu_saas_products"
+            sequence="10"
+            action="action_saas_manager_product_saas_products"
+            parent="menu_configuration"
+            />
+
+    </data>
+</openerp>
+<!-- vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4
+     -->

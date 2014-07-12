@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+##############################################################################
+#
+#    Saas Manager
+#    Copyright (C) 2014 Sistemas ADHOC
+#    No email
+#
+#    This program is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU Affero General Public License as
+#    published by the Free Software Foundation, either version 3 of the
+#    License, or (at your option) any later version.
+#
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU Affero General Public License for more details.
+#
+#    You should have received a copy of the GNU Affero General Public License
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#
+##############################################################################
+-->
+<!-- saas_manager.instance_user -->
+<!-- saas_manager.instance_user -->
+<!-- saas_manager.instance_user -->
+<openerp>
+    <data>
+
+        <!-- SEARCH VIEW -->
+        <record id="view_saas_manager_instance_user_filter" model="ir.ui.view">
+            <field name="name">saas_manager.instance_user.select</field>
+            <field name="model">saas_manager.instance_user</field>
+            <field name="arch" type="xml">
+                <search string="Instance Users" version="7.0">
+                    <group string="By Attribute">
+                    </group>
+                    <group string="By object">
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <!-- FORMVIEW -->
+        <record id="view_saas_manager_instance_user_form" model="ir.ui.view">
+            <field name="name">saas_manager.instance_user.form</field>
+            <field name="model">saas_manager.instance_user</field>
+            <field name="arch" type="xml">
+                <form string="Instance Users" version="7.0">
+                    <header>
+                    </header>
+                    <sheet string="Instance Users">
+                     <group>
+                        <field name="user_id"
+                            />
+                        <field name="remote_id"
+                            />
+                        <field name="active"
+                            />
+                     </group>
+                    </sheet>
+
+                </form>
+            </field>
+        </record>
+
+        <!-- TREEVIEW -->
+
+        <record id="view_saas_manager_instance_user_tree" model="ir.ui.view">
+            <field name="name">saas_manager.instance_user.tree</field>
+            <field name="model">saas_manager.instance_user</field>
+            <field name="arch" type="xml">
+                <tree string="Instance Users"
+                    >
+                    <field name="user_id"
+                        />
+                    <field name="remote_id"
+                        />
+                    <field name="active"
+                        />
+                </tree>
+            </field>
+        </record>
+
+    </data>
+</openerp>
+<!-- vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4
+     -->

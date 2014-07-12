@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+##############################################################################
+#
+#    Saas Manager
+#    Copyright (C) 2013 Sistemas ADHOC
+#    No email
+#
+#    This program is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU Affero General Public License as
+#    published by the Free Software Foundation, either version 3 of the
+#    License, or (at your option) any later version.
+#
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU Affero General Public License for more details.
+#
+#    You should have received a copy of the GNU Affero General Public License
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#
+##############################################################################
+-->
+<!-- saas_manager.product -->
+<!-- product.product -->
+<!-- product.product -->
+<openerp>
+    <data>
+
+        <!-- SEARCH VIEW -->
+        <!-- <record id="view_saas_product_filter" model="ir.ui.view">
+            <field name="name">saas_manager.product.select</field>
+            <field name="model">product.product</field>
+            <field name="arch" type="xml">
+                <search string="product" version="7.0">
+                    <group string="By Attribute">
+                    </group>
+                    <group string="By object">
+                    </group>
+                </search>
+            </field>
+        </record> -->
+
+        <!-- FORMVIEW -->
+        <record id="view_saas_product_form" model="ir.ui.view">
+            <field name="name">saas_manager.product.form</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_normal_form_view"/>
+            <field name="arch" type="xml">
+<!--                 <label for="sale_ok" position="after">
+                    <field name="saas_product"  attrs="{'invisible':[('type','!=','service')]}"/>
+                    <label for="saas_product" attrs="{'invisible':[('type','!=','service')]}"/>
+                </label> -->
+                <field name="description" position="before">
+                    <group col="1">
+                        <field name="product_module_ids" attrs="{'invisible':[('saas_subtype','!=','additional')]}"/>
+                    </group>
+                </field>
+                <field name="type" position="after">
+                    <field name="saas_subtype"/>
+                </field>
+                <page string="Information" position="after">
+                    <page string="SaaS" attrs="{'invisible':[('saas_subtype','!=','product')]}">
+                    <!-- <page string="SaaS Roles" attrs="{'invisible':[('saas_product','!=',True)]}"> -->
+                        <group colspan="4" col="4">
+                            <field name="base_url" attrs="{'required':[('saas_subtype','=','product')]}"/>
+                            <field name="server_url" attrs="{'required':[('saas_subtype','=','product')]}"/>
+                            <field name="server_port" attrs="{'required':[('saas_subtype','=','product')]}"/>
+                            <field name="server_super_admin_pwd" password="True" attrs="{'required':[('saas_subtype','=','product')]}"/>
+                            <field name="admin_name" attrs="{'required':[('saas_subtype','=','product')]}"/>
+                            <field name="admin_pass" password="True" attrs="{'required':[('saas_subtype','=','product')]}"/>
+                            <!-- <newline/> -->
+                            <!-- <group name="saas_template_help" class="oe_grey" colspan="4" col="1" groups="base.group_user"> -->
+                               <!-- <p attrs="{'invisible': ['|','|',('type','&lt;&gt;','service'),('procure_method','&lt;&gt;','make_to_stock')]}"> -->
+                               <p class="oe_grey" colspan="4">
+                               <!-- <p> -->
+                                    Remember to use <b>"saas_product_" </b>modules on template database in order to restrict some functions.
+                                   <!-- <br/><br/> -->
+                               </p>
+                            <!-- </group> -->
+                            <field name="template_db_name" attrs="{'required':[('saas_subtype','=','product')]}"/>
+                            <newline/>
+                            <field name="free_periods"/>
+                            <field name="free_periods_uom_id"/>
+                            <field name="included_users_qty"/>
+                            <field name="additional_user_product_id"/>
+                            <field name="additional_user_price"/>
+                        </group>
+                        <field name="additional_product_ids"/>
+                    </page>                
+                </page>                
+            </field>
+        </record>
+
+        <!-- TREEVIEW 
+        <record id="view_saas_product_tree" model="ir.ui.view">
+            <field name="name">saas_manager.product.tree</field>
+            <field name="model">product.product</field>
+            <field name="arch" type="xml">
+                <tree string="product"
+                    >
+                </tree>
+            </field>
+        </record>
+-->
+
+    </data>
+</openerp>
+<!-- vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4
+     -->

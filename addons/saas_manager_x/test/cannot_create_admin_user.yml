@@ -1,0 +1,34 @@
+-
+  Create a new saas instance ('saas_manager.instance').
+-
+  !record {model: saas_manager.instance, id: saas_instance_01}:
+    name: testing_instance_01
+    product_id: saas_manager_x.product_product_01
+    partner_id: base.main_partner
+-
+  Add a normal user to the instance.
+-
+  !python {model: saas_manager.instance_user}: |
+    model.create(cr, uid, {
+      'name': 'user01',
+      'login': 'user01',
+      'email': 'user01@admin.com',
+      'instance_id': ref('saas_instance_01'),
+    }, context)
+-
+  Add an admin user to the instance created. This should throw an exception.
+-
+  !python {model: saas_manager.instance_user}: |
+    created_fail = False
+
+    try:
+      model.create(cr, uid, {
+        'name': 'admin',
+        'login': 'admin',
+        'email': 'user01@admin.com',
+        'instance_id': ref('saas_instance_01'),
+      }, context)
+    except:
+      created_fail = True
+
+    assert created_fail

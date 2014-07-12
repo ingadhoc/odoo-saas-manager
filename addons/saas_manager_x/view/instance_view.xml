@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+##############################################################################
+#
+#    Saas Manager
+#    Copyright (C) 2013 Sistemas ADHOC
+#    No email
+#
+#    This program is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU Affero General Public License as
+#    published by the Free Software Foundation, either version 3 of the
+#    License, or (at your option) any later version.
+#
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU Affero General Public License for more details.
+#
+#    You should have received a copy of the GNU Affero General Public License
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#
+##############################################################################
+-->
+<!-- saas_manager.instance -->
+<!-- saas_manager.instance -->
+<!-- saas_manager.instance -->
+<openerp>
+    <data>
+
+        <!-- FORMVIEW -->
+        <record id="view_saas_instance_form" model="ir.ui.view">
+            <field name="name">saas_manager.instance.form</field>
+            <field name="model">saas_manager.instance</field>
+            <field name="inherit_id" ref="saas_manager.view_saas_manager_instance_form"/>
+            <field name="arch" type="xml">
+        
+                <sheet position="replace">
+                    <sheet string="Instance">      
+                        <field name="pricelist_id" invisible="1"/>
+                        <field name="fiscal_position" invisible="1"/>
+                        <field name="currency_id" invisible="1"/>
+                        <!-- We are not going to use image right now -->
+                        <!-- <field name="image" widget="image" class="oe_left oe_avatar" options="{&quot;preview_image&quot;: &quot;image_medium&quot;, &quot;size&quot;: [90, 90]}"/> -->
+                        <div class="oe_title">
+                            <div class="oe_edit_only">
+                                <label for="name"/>
+                            </div>
+                            <h1>
+                                <field name="name" default_focus="1" placeholder="Name"/>
+                            </h1>
+                            <h2>
+                                <field name="url" widget="url" attrs="{'invisible':[('state','!=','open')]}"/>
+                            </h2>
+                        </div>
+                        <div class="oe_right oe_button_box" name="buttons">
+                            <button name="update_users"
+                                states="open"
+                                type="object"
+                                string="Update Users"
+                                />                               
+                        </div>
+                        <group col="4">
+                            <!-- <field name="product_id"/> -->
+                            <field name="partner_id" domain="[('is_company', '=', True)]" context="{'default_is_company': True, 'default_customer': 1}" />
+                            <field name="product_id" on_change="product_id_change(pricelist_id, product_id, partner_id, True, fiscal_position, context)"/>
+                            <field name="tax_id" widget="many2many_tags" colspan="4"/>
+                            <!-- We are not going to use image right now -->
+                            <!--<field name="partner_id" domain="[('is_company', '=', True)]" context="{'default_is_company': True, 'default_customer': 1}" on_change="onchange_partner(partner_id)"/>-->
+                            <field name="admin_name" groups="base.group_no_one"/>          
+                            <field name="admin_pass" groups="base.group_no_one"/>
+                            <field name="db_created"/>
+                            <field name="product_free_periods"/>
+                            <newline/>
+                        </group>
+                        <notebook>
+                            <page string="Instance Lines">
+                                <group col="4">
+                                    <field name="instance_user_ids" colspan="8">
+                                        <tree editable="top">
+                                            <field name="name"/>
+                                            <field name="login"/>
+                                            <field name="email"/>
+                                            <field name="mobile"/>
+                                            <field name="phone"/>
+                                            <field name="active"/>
+                                            <field name="remote_id" groups="base.group_no_one"/>
+                                        </tree>
+                                </field>
+                                    <group colspan="2" name="instance_sub_products">
+                                        <field name="included_users_qty"/>
+                                        <field name="additional_users"/>
+                                        <field name="additional_user_price"/>
+                                        <field name="amount_users"/>
+                                        <field name="instance_additional_ids" context="{'product_id':product_id}"/>
+                                    </group>
+                                    <group class="oe_subtotal_footer oe_right" colspan="2" name="instance_total_total">
+                                        <field name="amount_users" widget='monetary' options="{'currency_field': 'currency_id'}"/>
+                                        <field name="product_price" widget='monetary' options="{'currency_field': 'currency_id'}"/>
+                                        <field name="additional_ammount" widget='monetary' options="{'currency_field': 'currency_id'}"/>
+                                        <div class="oe_subtotal_footer_separator oe_inline" colspan="2"/>
+                                        <!-- We dont use discount for now -->
+                                        <field name="subtotal" widget='monetary' options="{'currency_field': 'currency_id'}"/>
+                                        <field name="discount"/>
+                                        <field name="amount_untaxed" widget='monetary' options="{'currency_field': 'currency_id'}"/>
+                                        <field name="amount_tax" widget='monetary' options="{'currency_field': 'currency_id'}"/>
+                                        <div class="oe_subtotal_footer_separator oe_inline">
+                                            <label for="amount_total" />
+                                            <button name="button_dummy"
+                                                states="draft,sent" string="(update)" type="object" class="oe_edit_only oe_link"/>
+                                        </div>
+                                        <field name="amount_total" nolabel="1" class="oe_subtotal_footer_separator" widget='monetary' options="{'currency_field': 'currency_id'}"/>
+                                    </group>
+                                </group>
+                            </page>
+                            <page string="Periods">
+                                <field name="instance_period_ids"/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </sheet>
+            </field>
+        </record>
+
+
+    </data>
+</openerp>
+<!-- vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4
+     -->

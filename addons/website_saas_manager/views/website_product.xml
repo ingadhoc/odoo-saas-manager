@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+
+<!-- Layout add nav and footer -->
+<template id="footer_custom" inherit_id="website.layout" name="Footer Product's Links">
+    <xpath expr="//footer//ul[@name='products']" position="inside">
+        <a t-attf-href="/saas_products/">SaaS Products</a>
+    </xpath>
+</template>
+
+<template id="saas_products" name="Product">
+    <t t-call="website.layout">
+
+        <t t-set="additional_title">SaaS Product</t>
+
+        <div id="wrap" class="container">
+            <div class="row">
+                <h2 class="text-center">Choose the SaaS product that best fit yours need.</h2>
+            </div>
+
+            <div t-foreach="product_ids" t-as="product" class="row" style="margin: 20px;">
+                <div class="text-center">
+                    <span class="h4 text-center" t-field="product.name"/>
+                    -                    
+                    <a t-attf-href="/saas_product/#{ product.id }/" t-if="product.free_periods &gt; 0" class="h4">
+                        Try it free now!
+                    </a>
+                    <a t-attf-href="/saas_product/#{ product.id }/" t-if="product.free_periods == 0" class="h4">
+                        Hire Now!
+                    </a>
+                </div>
+            </div>
+        </div>
+    </t>
+</template>
+
+<template id="saas_product" name="Product">
+    <t t-call="website.layout">
+
+        <link rel='stylesheet' href='/website_saas_manager/static/src/css/website_saas_manager.css'/>
+
+        <t t-set="additional_title">Product</t>
+       
+        <div id="wrap" class="container">
+            <div class="row">
+                <h2 class="text-center" t-field="product.name"/>
+            </div>
+
+            <div class="row">
+                <h2 class="text-center">
+                    Start your online free trial
+                </h2>
+            </div>
+
+            <div class="control-group row" style="margin: 20px;">
+                <h4 class="text-center" t-if="error_message"><t t-esc="error_message"/></h4>
+
+                <!--<form t-attf-action="/saas_product/#{ product.id }/register/" method="get" role="form" class="form-inline text-center">-->
+                <form t-attf-action="" method="get" role="form" class="form-inline text-center">
+
+                    <div class="form-group field-name">
+                        <input name="instance_name" placeholder="Your Domain" id="instance_name" class="form-control" type="text" t-if="instance_name" t-att-value="instance_name"/>
+                        
+                        <input name="instance_name" placeholder="Your Domain" id="instance_name" class="form-control" type="text" t-if="not instance_name"/>
+                    </div>
+
+                    <span class="oe_domain">.<t t-esc="product.base_url"/></span>
+
+                    <div class="form-group" style="margin-left: 30px;">
+                        <button id="create_instance" class="btn btn-primary" type="submit">Create My Company</button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="row" t-if="error_message" id="notification_area" style="margin-top:20px;">
+                <div class="alert alert-danger text-center col-md-6 col-md-offset-3">
+                    <t t-esc="error_message"/>
+                </div>
+            </div>
+      </div>
+    </t>
+</template>
+
+<template id="signup" name="Sign-up">
+    <t t-call="website.layout">
+        <link rel='stylesheet' href='/website_saas_manager/static/src/css/website_saas_manager.css'/>
+        <t t-set="additional_title">Product</t>
+        <div id="wrap">
+            <h2 class="text-center" t-field="product.name"/>
+            
+            <div class="saas_manager_login_container control-group">
+                <div class="alert alert-info">
+                    Last details before your company is set up
+                </div>
+
+                <form t-attf-action="/saas_product/#{ product.id }/create/" method="get">
+
+                    <input name="instance_name" id="instance_name" type="text"
+                        t-att-value="instance_name"/>
+
+                    <div class="form-group field-login" t-if="not user.active">
+                        <label class="control-label" for="login">Your Email</label>
+                        <input name="login" required="required" id="login" autofocus="autofocus" class="form-control" type="email"/>
+                    </div>
+
+                    <div class="form-group field-name" t-if="not user.active">
+                        <label class="control-label" for="name">Your Name</label>
+                        <input name="name" placeholder="e.g. John Doe" required="required" id="name" class="form-control" type="text"/>
+                    </div>
+
+                    <div class="form-group field-password" t-if="not user.active">
+                        <label class="control-label" for="password">Password</label>
+                        <input name="password" required="required" id="password" class="form-control" type="password"/>
+                    </div>
+
+                    <div class="form-group field-confirm_password" t-if="not user.active">
+                        <label class="control-label" for="confirm_password">Confirm Password</label>
+                        <input class="form-control" required="required" name="confirm_password" id="confirm_password" type="password"/>
+                    </div>
+
+                    <div class="form-group field-company_size">
+                        <label class="control-label" for="company_size">Company Size</label>
+                        <select name="company_size" class="form-control">
+                            <option value=""></option>
+                            <option value="1-5">less than 5 employees</option>
+                            <option value="5-20">5-20 employees</option>
+                            <option value="20-50">20-50 employees</option>
+                            <option value="50-250">50-250 employees</option>
+                            <option value="250-1000">250-1000 employees</option>
+                            <option value="1000-over">more than 1000 employees</option>
+                        </select>
+                    </div>
+
+                    <div class="clearfix oe_login_buttons">
+                        <button type="submit" class="btn btn-primary pull-left">
+                            Create my company
+                        </button>
+                        
+                        <a t-att-href="'/web/login?redirect=/saas_product/' + str(product.id) + '/register/?instance_name=' + instance_name" t-if="show_login">
+                            Back to Login
+                        </a>
+                    </div>
+                </form>
+            </div>
+      </div>
+    </t>
+</template>
+
+</data>
+</openerp>

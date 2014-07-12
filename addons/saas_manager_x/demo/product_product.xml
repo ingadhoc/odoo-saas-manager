@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data noupdate="1">
+        <record id="product_saas_test_01" model="product.product">
+            <field name="name">Test SaaS</field>
+            <field name="saas_product">True</field>
+            <field name="base_url">localhost</field>
+            <field name="server_url">localhost</field>
+            <field name="server_port">8069</field>
+            <field name="server_super_admin_pwd">admin</field>
+            <field name="admin_name">admin</field>
+            <field name="admin_pass">admin</field>
+            <field name="template_db_name">template</field>
+            <field name="uom_po_id" ref="saas_x.product_uom_month"/>
+            <field name="uom_id" ref="saas_x.product_uom_month"/>
+            <field name="type">service</field>
+            <field name="list_price">120</field>
+            <field name="free_periods">1</field>
+            <field name="free_periods_uom_id" ref="saas_x.product_uom_month"/>
+        </record>
+    </data>
+</openerp>

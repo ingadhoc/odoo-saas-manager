@@ -1,0 +1,2 @@
+id	name	saas_product	base_url	server_url	server_port	server_super_admin_pwd	admin_name	admin_pass	template_db_name	uom_po_id/id	uom_id/id	type	list_price	free_periods	free_periods_uom_id/id
+test_product_01	Test Clinic	True	localhost	localhost	80	admin	admin	admin	template	saas_x.product_uom_month	saas_x.product_uom_month	service	120	1	saas_x.product_uom_month

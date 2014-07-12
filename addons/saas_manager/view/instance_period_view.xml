@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+##############################################################################
+#
+#    Saas Manager
+#    Copyright (C) 2014 Sistemas ADHOC
+#    No email
+#
+#    This program is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU Affero General Public License as
+#    published by the Free Software Foundation, either version 3 of the
+#    License, or (at your option) any later version.
+#
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU Affero General Public License for more details.
+#
+#    You should have received a copy of the GNU Affero General Public License
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#
+##############################################################################
+-->
+<!-- saas_manager.instance_period -->
+<!-- saas_manager.instance_period -->
+<!-- saas_manager.instance_period -->
+<openerp>
+    <data>
+
+        <!-- SEARCH VIEW -->
+        <record id="view_saas_manager_instance_period_filter" model="ir.ui.view">
+            <field name="name">saas_manager.instance_period.select</field>
+            <field name="model">saas_manager.instance_period</field>
+            <field name="arch" type="xml">
+                <search string="instance_period" version="7.0">
+                    <group string="By Attribute">
+                    <field name="date_from" string="date_from"
+                            />
+                    <field name="date_to" string="date_to"
+                            />
+                    <field name="description" string="description"
+                            />
+                    <field name="invoice_line_id" string="invoice_line_id"
+                            />
+                    <field name="type" string="type"
+                            />
+                    <field name="residual" string="residual"
+                            />
+                    <field name="amount_total" string="amount_total"
+                            />
+                    <field name="date_due" string="date_due"
+                            />
+                    <field name="state" string="state"
+                            />
+                    </group>
+                    <group string="By object">
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <!-- FORMVIEW -->
+        <record id="view_saas_manager_instance_period_form" model="ir.ui.view">
+            <field name="name">saas_manager.instance_period.form</field>
+            <field name="model">saas_manager.instance_period</field>
+            <field name="arch" type="xml">
+                <form string="instance_period" version="7.0">
+                    <header>
+                    </header>
+                    <sheet string="instance_period">
+                     <group>
+                        <field name="date_from"
+                            />
+                        <field name="date_to"
+                            />
+                        <field name="description"
+                            />
+                        <field name="invoice_line_id"
+                            />
+                        <field name="type"
+                            />
+                        <field name="residual"
+                            />
+                        <field name="amount_total"
+                            />
+                        <field name="date_due"
+                            />
+                        <field name="state"
+                            />
+                     </group>
+                    </sheet>
+
+                </form>
+            </field>
+        </record>
+
+        <!-- TREEVIEW -->
+
+        <record id="view_saas_manager_instance_period_tree" model="ir.ui.view">
+            <field name="name">saas_manager.instance_period.tree</field>
+            <field name="model">saas_manager.instance_period</field>
+            <field name="arch" type="xml">
+                <tree string="instance_period"
+                    colors="blue:(state in ['uninvoiced','draft']);red:(state == 'due');grey:(state == 'cancelled');green:(state in ['paid','free']);"
+                    >
+                    <field name="date_from"
+                        />
+                    <field name="date_to"
+                        />
+                    <field name="description"
+                        />
+                    <field name="invoice_line_id"
+                        />
+                    <field name="type"
+                        />
+                    <field name="residual"
+                        />
+                    <field name="amount_total"
+                        />
+                    <field name="date_due"
+                        />
+                    <field name="state"
+                        />
+                </tree>
+            </field>
+        </record>
+
+    </data>
+</openerp>
+<!-- vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4
+     -->

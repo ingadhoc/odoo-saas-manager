@@ -1,0 +1,2 @@
+id,name,saas_product,base_url,server_url,server_port,server_super_admin_pwd,admin_name,admin_pass,template_db_name,uom_po_id/id,uom_id/id,type,list_price,free_periods,free_periods_uom_id/id
+product_product_01,Clinic,True,clinicadhoc.com.ar,accounts.clinicadhoc.com.ar,80,ADHOC.2010,admin,admin,template,saas_manager_x.product_uom_month,saas_manager_x.product_uom_month,service,120,1,saas_manager_x.product_uom_month

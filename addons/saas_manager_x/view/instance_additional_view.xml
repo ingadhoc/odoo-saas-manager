@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+##############################################################################
+#
+#    Saas Manager
+#    Copyright (C) 2014 Sistemas ADHOC
+#    No email
+#
+#    This program is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU Affero General Public License as
+#    published by the Free Software Foundation, either version 3 of the
+#    License, or (at your option) any later version.
+#
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU Affero General Public License for more details.
+#
+#    You should have received a copy of the GNU Affero General Public License
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#
+##############################################################################
+-->
+<!-- saas_manager.instance_additional -->
+<!-- saas_manager.instance_additional -->
+<!-- saas_manager.instance_additional -->
+<openerp>
+    <data>
+
+        <!-- FORMVIEW -->
+        <record id="view_saas_manager_instance_additional_form" model="ir.ui.view">
+            <field name="name">saas_manager.instance_additional.form</field>
+            <field name="model">saas_manager.instance_additional</field>
+            <field name="inherit_id" ref="saas_manager.view_saas_manager_instance_additional_form"/>
+            <field name="arch" type="xml">
+                <field name="additional_product_id" position="after">
+<!--                     <group class="oe_subtotal_footer oe_left" colspan="1" name="subproduct_total">
+                        <field name="active_users"/>
+                        <field name="additional_per_user_amount" widget='monetary' options="{'currency_field': 'currency_id'}"/>  
+                    </group>                  
+                    <group class="oe_subtotal_footer oe_right oe_inline" colspan="1" name="subproduct_total">
+                        <field name="additional_amount_by_users" widget='monetary' options="{'currency_field': 'currency_id'}"/>
+                        <field name="additional_period_amount" widget='monetary' options="{'currency_field': 'currency_id'}"/>
+                        <div class="oe_subtotal_footer_separator oe_inline">
+                            <label string="Amount Total" />
+                        </div>
+                    </group>                     -->
+                        <field name="additional_price" widget='monetary' options="{'currency_field': 'currency_id'}"/>
+                </field>
+            </field>
+        </record>
+
+        <!-- TREEVIEW -->
+
+        <record id="view_saas_manager_instance_additional_tree" model="ir.ui.view">
+            <field name="name">saas_manager.instance_additional.tree</field>
+            <field name="model">saas_manager.instance_additional</field>
+            <field name="inherit_id" ref="saas_manager.view_saas_manager_instance_additional_tree"/>
+            <field name="arch" type="xml">
+                <field name="additional_product_id" position="after">
+                    <field name="additional_price"/>
+                </field>
+            </field>
+        </record>
+
+    </data>
+</openerp>
+<!-- vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4
+     -->

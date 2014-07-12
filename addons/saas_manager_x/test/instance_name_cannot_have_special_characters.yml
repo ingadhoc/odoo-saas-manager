@@ -1,0 +1,16 @@
+-
+  Cannot create an instance with spaces.
+-
+  !python {model: saas_manager.instance}: |
+    created_fail = False
+
+    try:
+      model.create(cr, uid, {
+        'name': 'name with_spaces',
+        'product_id': ref('saas_manager_x.product_product_01'),
+        'partner_id': ref('base.main_partner')
+      }, context)
+    except:
+      created_fail = True
+
+    assert created_fail
